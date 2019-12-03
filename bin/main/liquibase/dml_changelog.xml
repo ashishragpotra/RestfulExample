@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+   
+   
+   <changeSet author="aragpotra" id="1.03" runOnChange="false">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				select count(*) from t_job where
+				category = 'FULL_TIME';
+			</sqlCheck>
+		</preConditions>
+		<sql>
+			INSERT INTO t_job(
+			id, title, description, category)
+			VALUES (NEXT
+			VALUE FOR job_sequence , 'Software Engineer','Full Stack Developer','FULL_TIME');
+		</sql>
+	</changeSet>
+   
+   
+ </databaseChangeLog>
